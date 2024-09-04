@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, MouseEvent } from 'react';
 import axios from 'axios';
 import './App.css';
 
-function App() {
-    const [file, setFile] = useState(null);
-    const [svg, setSvg] = useState(null);
-    const [loading, setLoading] = useState(false);
+const App: React.FC = () => {
+    const [file, setFile] = useState<File | null>(null);
+    const [svg, setSvg] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
 
-    const handleFileChange = (event) => {
-        setFile(event.target.files[0]);
+    const handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
+        if (event.target.files) {
+            setFile(event.target.files[0]);
+        }
     };
 
-    const handleUpload = async () => {
+    const handleUpload = async (): Promise<void> => {
         if (!file) return;
 
         setLoading(true);
@@ -37,7 +39,7 @@ function App() {
         }
     };
 
-    const handleDownload = () => {
+    const handleDownload = (event: MouseEvent<HTMLButtonElement>): void => {
         if (!svg) return;
 
         const link = document.createElement('a');
