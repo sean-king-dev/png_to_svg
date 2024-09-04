@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, MouseEvent } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import axios from 'axios';
 import './App.css';
 
@@ -39,7 +39,7 @@ const App: React.FC = () => {
         }
     };
 
-    const handleDownload = (event: MouseEvent<HTMLButtonElement>): void => {
+    const handleDownload = (): void => {
         if (!svg) return;
 
         const link = document.createElement('a');
